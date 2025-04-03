@@ -15,6 +15,8 @@ public class CalculatorTest {
     final static String STRING_4 = "1,";
     final static String STRING_5 = "1,2,3";
     final static String STRING_6 = "1,2,3,4,5";
+    final static String STRING_7 = "1\n2,3";
+    final static String STRING_8 = "1,\n";
     final static int SUM_STRING_2 = 8;
     final static int SUM_STRING_3 = 6;
     final static int SUM_STRING_5 = 15;
@@ -66,6 +68,16 @@ public class CalculatorTest {
     void whenFiveNumericalCharactersAndManyDelimiters_thenReturnsTheSumOfConvertedVersions(){
         int result = calculator.add(STRING_6);
         assertEquals(SUM_STRING_5, result);
+    }
+    @Test
+    void whenThreeNumericalCharactersAndComaDelimiterAndNewLineDelimiter_thenReturnsTheSumOfConvertedVersions(){
+        int result = calculator.add(STRING_7);
+        assertEquals(SUM_STRING_3, result);
+    }
+    @Test
+    void whenOneNumericalCharacterAndNewLineDelimiter_thenReturnsConvertedVersions(){
+        int result = calculator.add(STRING_8);
+        assertEquals(Integer.parseInt(STRING_1), result);
     }
     @Test
     void whenNonNumericValues_thenThrowInvalidInput() {
