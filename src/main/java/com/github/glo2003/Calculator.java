@@ -10,24 +10,13 @@ public class Calculator {
         if (numbers.isEmpty()) {
             return sum;
         }
-         else if (split.length == 1) {
-            try{
-                sum = Integer.parseInt(numbers);
-            } catch (NumberFormatException e) {
-                throw new InvalidNumberFormatException();
-            }
-            return sum;
+        try{
+            sum = (List.of(split)).stream()
+                    .mapToInt(Integer::parseInt)
+                    .sum();
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberFormatException();
         }
-         else if (split.length == 2){
-             try {
-                 sum = (List.of(split)).stream()
-                         .mapToInt(Integer::parseInt)
-                         .sum();
-             } catch (NumberFormatException e){
-                 throw new InvalidNumberFormatException();
-             }
-             return sum;
-        }
-        throw new InvalidNumberFormatException();
+        return sum;
     }
 }

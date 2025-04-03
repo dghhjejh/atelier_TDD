@@ -9,11 +9,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CalculatorTest {
 
     Calculator calculator;
-    final static String String_1 = "1";
-    final static String String_2 = "4,4";
-    final static String String_3 = "4,,4";
-    final static String String_4 = "1,";
-    final static int Sum_String_2 = 8;
+    final static String STRING_1 = "1";
+    final static String STRING_2 = "4,4";
+    final static String STRING_3 = "4,,4";
+    final static String STRING_4 = "1,";
+    final static String STRING_5 = "1,2,3";
+    final static String STRING_6 = "1,2,3,4,5";
+    final static int SUM_STRING_2 = 8;
+    final static int SUM_STRING_3 = 6;
+    final static int SUM_STRING_5 = 15;
+
 
     @BeforeEach
     void setUp() {
@@ -28,9 +33,9 @@ public class CalculatorTest {
     }
     @Test
     void whenOnlyOneNumericalCharacter_thenReturnsConvertedVersion(){
-        int result = calculator.add(String_1);
+        int result = calculator.add(STRING_1);
 
-        assertEquals(Integer.parseInt(String_1), result);
+        assertEquals(Integer.parseInt(STRING_1), result);
     }
     @Test
     void whenOnlyOneNonNumericalCharacter_thenthrowInvalidInput(){
@@ -39,18 +44,30 @@ public class CalculatorTest {
     }
     @Test
     void whenOnlyOneNumericalCharacterAndOneDelimiter_thenreturnsConvertedversion(){
-        int result = calculator.add(String_4);
-        assertEquals(Integer.parseInt(String_1), result);
+        int result = calculator.add(STRING_4);
+        assertEquals(Integer.parseInt(STRING_1), result);
     }
+    @Test
     void whenTwoNumericalCharactersAndOneDelimiter_thenReturnsTheSumOfConvertedVersions(){
-        int result = calculator.add(String_2);
-        assertEquals(Sum_String_2, result);
+        int result = calculator.add(STRING_2);
+        assertEquals(SUM_STRING_2, result);
     }
     @Test
     void whenTwoNumericalCharactersAndManyDelimiters_thenReturnsTheSumOfConvertedVersions(){
-        int result = calculator.add(String_3);
-        assertEquals(Sum_String_2, result);
+        int result = calculator.add(STRING_3);
+        assertEquals(SUM_STRING_2, result);
     }
+    @Test
+    void whenThreeNumericalCharactersAndManyDelimiters_thenReturnsTheSumOfConvertedVersions(){
+        int result = calculator.add(STRING_5);
+        assertEquals(SUM_STRING_3, result);
+    }
+    @Test
+    void whenFiveNumericalCharactersAndManyDelimiters_thenReturnsTheSumOfConvertedVersions(){
+        int result = calculator.add(STRING_6);
+        assertEquals(SUM_STRING_5, result);
+    }
+    @Test
     void whenNonNumericValues_thenThrowInvalidInput() {
         assertThrows(InvalidNumberFormatException.class,
                 () -> calculator.add("4,a"));
